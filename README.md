@@ -18,6 +18,3 @@ Game Library - Made using React.
 - Access the web application at `localhost:8080`.
 
 </td></tr></table>
-
-<table align="center"><tr><td align="center" width="9999">
-</td></tr></table>
