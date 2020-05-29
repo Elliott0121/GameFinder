@@ -1,0 +1,407 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*------- Icons --------*/
+[id^='icon-'] {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-size: 24px auto;
+}
+
+#icon-PlayStation4, #icon-PlayStation5  {
+  background-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/playstation.svg");
+}
+
+#icon-PlayStation3 {
+  background-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/playstation3.svg");
+}
+
+#icon-PlayStation2 {
+  background-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/playstation2.svg");
+}
+
+#icon-PC {
+  background-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/windows.svg");
+}
+
+#icon-Linux {
+  background-image: url("https://simpleicons.org/icons/linux.svg");
+}
+
+#icon-macOS {
+  background-image: url("https://simpleicons.org/icons/apple.svg");
+}
+
+#icon-XboxOne, #icon-XboxSeriesX {
+  background-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/xbox.svg");
+}
+
+#icon-NintendoSwitch {
+  background-image: url("https://simpleicons.org/icons/nintendoswitch.svg");
+}
+
+#icon-Nintendo3DS {
+  background-image: url("https://simpleicons.org/icons/nintendo3ds.svg");
+}
+
+/*------- Main CSS --------*/
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+  background-color: #eeeeee;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+ul > a:hover {
+  text-decoration: underline;
+  color: #2e2e2e;
+}
+
+#Developers:hover {
+  transition: ease-in-out;
+  transform: scale(1.1);
+}
+
+h3, h5, p {
+  color: rgb(0, 0, 0)
+}
+
+h3 {
+  margin-top: 0px;
+}
+
+img, video {
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.divider-gamelist {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.bottom-icon {
+  text-align: right;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+#left-button, #right-button {
+  padding: 0px;
+}
+
+#App > .ui.container > .ui.divider {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.ui.card > a > .image > .ui.placeholder {
+  height: 155px;
+}
+
+.ui.placeholder {
+  height: 100%;
+  width: 100%;
+}
+
+.ui.placeholder > img {
+  height: 100%;
+  width: 100%;
+}
+
+.ui.header:first-child {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.ui.header > .ui.large.header {
+  margin: 0px;
+  margin-bottom: 2rem;
+}
+
+.ui.text.container > .ui.header > .ui.header {
+  margin-bottom: 0px;
+}
+
+.ui.header > #platforms {
+  margin-top: 1rem;
+}
+
+.ui.list > .game-rating {
+  margin-top: 1em;
+}
+
+.ui.text.container > .ui.celled.grid > .ui.bordered.image {
+  padding: 10px;
+  height: auto;
+}
+
+.description {
+  opacity: 0;
+}
+
+.ui.card:hover > .content > .description {
+  z-index: 1;
+  opacity: 1;
+  transition: opacity .5s ease-in-out;
+}
+
+.ui.card {
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: none;
+  transition: all .5s ease-in-out;
+}
+
+.ui.grid {
+  justify-content: center;
+}
+
+.ui.grid > .column > .ui.card:hover > a > .image > .ui.placeholder {
+  box-shadow: 5px 5px 5px #bdbdbd;
+  transform: scale(1.05);
+  transition: all .2s ease-in-out;
+}
+
+.content > .header {
+  text-align: left;
+}
+
+.ui.card > .content {
+  padding: 0px;
+  padding-top: 10px;
+  min-height: 80px;
+  background-color: #eeeeee;
+}
+
+.message > .ui.items {
+  overflow-y: scroll;
+  height: 400px;
+}
+
+.message > .ui.items > .item {
+  padding: 0px !important;
+  margin: 0px !important;
+  outline: 1px solid #f2f2f2 !important;
+  border: 1px solid #f2f2f2 !important;
+  margin-bottom: 5px !important;
+}
+
+.message > .ui.items > .item > .ui.tiny.image {
+  max-width: 80px;
+  max-height: 45px;
+}
+
+.ui.tiny.image > img {
+  max-width: 100%;
+  max-height: 45px;
+  object-fit: cover;
+}
+
+.results.transistion > .message {
+  width: 300px;
+}
+
+.background-gradient {
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%); 
+}
+
+.background-gradient > .game-background {
+  max-height: 300px;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+.game-background > img {
+  display: block;
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.ui.header > .meta {
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+.game-description {
+  max-height: 182.8px;
+  overflow-y: auto;
+}
+
+.ui.text.container {
+  margin-top: 1rem;
+}
+
+.ui.text.container > .ui.segment, .ui.container > .ui.segment {
+  position: relative;
+  margin: 1rem 0;
+  background: none;
+  box-shadow: none;
+  padding: 0px;
+  border: none;
+  font-size: 1em;
+}
+
+.column > .ui.container {
+  width: 100%;
+  height: 100%;
+}
+
+.ui.container > .ui.segment {
+  width: 100%;
+  margin: 0px;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+}
+
+.game-background > video {
+  width: 100%;
+  height: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.column > span {
+  display: inline list-item;
+  margin-right: 5px;
+}
+
+.ui.column.four.wide.computer > .ui.card > .ui.image {
+  background: rgba(0, 0, 0, 0);
+}
+
+.ui.image > i {
+  opacity: 0.8;
+  font-size: 52px;
+  margin: 10px;
+}
+
+#Developers > .ui.image {
+  max-width: 75px;
+  max-height: 75px;
+  height: 75px;
+  width: 75px;
+  border-radius: 75px 75px 75px 75px !important;
+  background-color: #e8e8e8;
+  display: flex;
+  justify-content: center;
+  box-shadow: 5px 5px 5px #bdbdbd;
+}
+
+.ui.card > .content {
+  border-top: none;
+}
+
+.ui.card > .ui.image > img{
+  max-width: 75px;
+  max-height: 75px;
+  height: 75px;
+  width: 75px;
+  border-radius: 75px 75px 75px 75px !important;
+  box-shadow: 5px 5px 5px #bdbdbd;
+}
+
+#App > .ui.container > .header {
+  margin-top: 50px;
+}
+
+.ui.container > .header > h1 {
+  font-size: 48px;
+}
+
+#App > .ui.container > .header, .ui.search.right.item{
+  text-align: center;
+}
+
+.ui.large.secondary.menu {
+  justify-content: center;
+}
+
+.bar-container {
+  float: left;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 30px;
+  display: grid;
+  margin-left: 1px;
+}
+
+.bar{
+  height: 100%;
+  float: left;
+  max-height: 10px;
+}
+
+.ui.compact.message {
+  display: none;
+}
+
+.bar:hover > .ui.compact.message {
+  position: absolute;
+  bottom: 30px;
+  display: block;
+  text-transform: capitalize;
+}
+
+.ui.placeholder > .ban.huge.icon {
+  margin: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  opacity: 0.8;
+}
+
+#game-showcase {
+  margin: 3em;
+}
+
+.image-gallery {
+  width: 700px;
+}
+
+/*-------Media Queries--------*/
+@media screen and (max-width: 1200px) {
+  .ui.grid > [class*="four wide computer"].column {
+    width: 30% !important;
+  }
+}
+@media screen and (max-width: 990px) {
+  .ui.grid > [class*="four wide computer"].column {
+    width: 30% !important;
+  }
+  .ui.container {
+    width: 900px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .ui.grid > [class*="four wide computer"].column {
+    width: 40% !important;
+  }
+}
+@media screen and (max-width: 540px) {
+  .ui.grid > [class*="four wide computer"].column {
+    width: 50% !important;
+  }
+}
+@media screen and (max-width: 420px) {
+  .ui.grid > [class*="four wide computer"].column {
+    width: 85% !important;
+  }
+}
