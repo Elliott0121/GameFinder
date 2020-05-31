@@ -12,7 +12,7 @@ class App extends Component {
     this.scrollDivUp = createRef();
     this.scrollDivDown = createRef();
     this.state = {
-      items: [],
+      items: { games: [], collection: [] },
       currentDate: this.setDate(),
       currentPage: 2,
       gamesLength: '',
@@ -43,7 +43,7 @@ class App extends Component {
       axios.get(`https://api.rawg.io/api/games?dates=${this.state.currentDate},${new Date(this.state.currentDate).toLocaleDateString('en-US', { year: 'numeric' })}-12-31&ordering=-added&page=1`)
         .then(res => {
           const getGames = res.data.results;
-          this.setState({ items: getGames });
+          this.setState({ items: { games: getGames, collection: JSON.parse(localStorage.getItem('Collection')) || [] } });
         })
     } catch (error) {
       if (error.response) {
@@ -64,9 +64,9 @@ class App extends Component {
   loadnewPage() {
     axios.get(`https://api.rawg.io/api/games?dates=${this.state.currentDate},${new Date(this.state.currentDate).toLocaleDateString('en-US', { year: 'numeric' })}-12-31&ordering=-added&page=${this.state.currentPage}`)
       .then(res => {
-        const newGames = this.state.items.concat(res.data.results);
+        const newGames = this.state.items.games.concat(res.data.results);
         this.setState(prevState => {
-          return { currentPage: prevState.currentPage + 1, items: newGames }
+          return { currentPage: prevState.currentPage + 1, items: { games: newGames, collection: JSON.parse(localStorage.getItem('Collection')) || [] } }
         })
         console.log(this.state.currentPage);
       })
@@ -77,12 +77,55 @@ class App extends Component {
   }
 
   saveGame(event) {
-    //localStorage.setItem('collection', JSON.stringify(this.state.))
-    event.target.textContent = 'Status: Completed';
-    event.target.className = 'ui compact small basic primary button animate__animated animate__fadeIn';
+    //event.target.children.textContent = 'Status: Completed';
+    //event.target.children.className = 'ui compact small basic primary button animate__animated animate__fadeIn';
+    let content = event.target.parentElement.parentElement.parentNode.children;
+    let newGame = {
+      name: event.target.parentElement.parentElement.parentNode.children[0].innerHTML,
+      id: content[1].getAttribute('data-id'),
+      slug: content[1].getAttribute('data-slug'),
+      image: content[1].getAttribute('data-image'),
+      release: content[1].firstChild.nextSibling.data,
+      status: 'Completed'
+    }
+    let currentCollection = [...this.state.items.collection]
+    currentCollection.push(newGame)
+    this.setState({ items: { games: this.state.items.games, collection: currentCollection } })
+    localStorage.setItem('Collection', JSON.stringify(currentCollection));
+  }
+
+  loadCollection() {
+    const games = localStorage.getItem('Collection');
+    const parsedGames = JSON.parse(games);
+    this.setState({ items: { games: this.state.items.games, collection: parsedGames || [] } })
+  }
+
+  checkStatus(item) {
+    if (this.state.items.collection != null) {
+      return this.state.items.collection.some(game => game.id == item.id)
+    } else {
+      return;
+    }
   }
 
   render() {
+    const deleteGame = (event) => {
+      // Tar bort filmen som användaren klickar på.
+      let currentState = [...this.state.items.collection];
+      let index = currentState.findIndex(
+        item => item.name === event.target.parentElement.parentElement.previousSibling.previousSibling.innerHTML
+      );
+      console.log(event.target.parentElement.parentElement.previousSibling.previousSibling.innerHTML)
+      const val = window.confirm(`Remove From Collection?`);
+      if (val) {
+        currentState.splice(index, 1);
+        this.setState({ items: { games: this.state.items.games, collection: currentState || [] } });
+
+        localStorage.setItem("Collection", JSON.stringify(currentState));
+        console.log(currentState, index);
+        this.loadCollection()
+      }
+    }
     return (
       <Router>
         <div id="App">
@@ -95,7 +138,7 @@ class App extends Component {
                 </div>
                 <div className="ui large secondary menu">
                   <div className="Search">
-                    <SearchBar items={this.state.items} />
+                    <SearchBar items={this.state.items.games} />
                   </div>
                 </div>
                 <div className="divider-gamelist">
@@ -112,7 +155,7 @@ class App extends Component {
                   </div>
                 </div>
                 <div className="ui grid">
-                  <GameCollection items={this.state.items} />
+                  <GameCollection items={this.state.items} loadCollection={this.loadCollection.bind(this)} saveGame={this.saveGame.bind(this)} deleteGame={deleteGame} />
                 </div>
                 <div className="ui divider"></div>
                 <div className="ui header">
@@ -120,13 +163,12 @@ class App extends Component {
                     <span>Trending games this month - {new Date(this.state.currentDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</span>
                   </div>
                 </div>
-                <div className="ui divider" />
                 <div className="ui grid">
                   {this.state.loading ?
                     <div className="content" style={{ width: '100% !important', height: '300px' }}>
                       <div style={{ position: 'relative' }} className="ui active centered large text loader">Loading</div>
                     </div>
-                    : <GameList items={this.state.items} saveGame={this.saveGame.bind(this)} />}
+                    : <GameList items={this.state.items} saveGame={this.saveGame.bind(this)} checkStatus={this.checkStatus.bind(this)} />}
                 </div>
                 <div className="divider-gamelist">
                   <div className="showmore-icon">
@@ -145,7 +187,7 @@ class App extends Component {
                 </div>
               </div>
             </Route>
-            <Route path="/games/:id" render={(props) => <GamePage {...props} saveGame={this.saveGame.bind(this)}/>} />
+            <Route path="/games/:id" render={(props) => <GamePage {...props} saveGame={this.saveGame.bind(this)} checkStatus={this.checkStatus.bind(this)} />} />
             <Route component={() => (<h1 style={{ textAlign: "center" }}>404 Not found </h1>)} />
           </Switch>
         </div>

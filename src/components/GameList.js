@@ -11,8 +11,8 @@ class GameList extends Component {
   }
 
   render() {
-    return this.props.items.map((item) => (
-      <div className="four wide computer seven wide mobile five wide tablet column" key={item.id} id={item.slug}>
+    return this.props.items.games.map((item) => (
+      <div className="four wide computer seven wide mobile five wide tablet column" key={item.id} id={item.id}>
         <div className="ui card" draggable="false" unselectable="on">
           <Link to={`/games/${item.id}/${item.slug}`}>
             <div className="image">
@@ -23,10 +23,15 @@ class GameList extends Component {
           </Link>
           <div className="content">
             <div className="header">{item.name}</div>
-            <div className="meta">Release date - {item.tba === true ? "To Be Announced" : item.released}</div>
+            <div className="meta" data-id={item.id} data-image={item.background_image} data-slug={item.slug}>
+              Release date - {item.tba === true ? "To Be Announced" : item.released}</div>
             <div className="description">
-              <button className="ui compact small basic button left floated" onClick={(e) => this.props.saveGame(e)}>
-                <i aria-hidden="true" class="star outline icon"></i>Add game to collection</button>
+              <div id="Status">
+                {this.props.checkStatus(item) == false ? <button className="ui small compact basic button" onClick={(e) => this.props.saveGame(e)}>
+                  <i aria-hidden="true" class="star outline icon"></i>Add game to collection</button> :
+                  <button className="ui small compact basic primary button animate__animated animate__fadeIn">Status: Completed</button>
+                }
+              </div>
             </div>
           </div>
         </div>
@@ -36,7 +41,7 @@ class GameList extends Component {
 }
 
 GameList.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.object.isRequired
 }
 
 export default GameList;

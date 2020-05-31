@@ -124,9 +124,14 @@ class GamePage extends Component {
                             <div className="ui text container">
                                 <div className="ui header">
                                     <div className="ui header">{game.name}</div>
-                                    <div className="meta">Release date - {game.tba === true ? "To Be Announced" : game.released}
-                                        <button class="ui small compact basic button" onClick={(e) => this.props.saveGame(e)} style={{ marginLeft: '10px', padding: '5px' }}>
-                                            <i aria-hidden="true" class="star outline icon"></i>Add Game to Collection</button></div>
+                                    <div className="meta" data-id={game.id} data-image={game.background_image} data-slug={game.slug}>Release date - {game.tba === true ? "To Be Announced" : game.released}
+                                        <div id="Status" style={{marginLeft: '10px', display: 'inline'}}>
+                                            {this.props.checkStatus(game) == false ? <button className="ui small compact basic button" onClick={(e) => this.props.saveGame(e)} style={{ marginLeft: '10px', padding: '5px' }}>
+                                                <i aria-hidden="true" class="star outline icon"></i>Add game to collection</button> :
+                                                <button className="ui small compact basic primary button animate__animated animate__fadeIn">Status: Completed</button>
+                                            }
+                                        </div>
+                                    </div>
                                     <div id="platforms" className="ui list">
                                         <div className="ui grid">
                                             <div className="column">{gamePf}</div>
