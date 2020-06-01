@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import { Modal } from 'semantic-ui-react';
 
 class GameCollection extends Component {
     constructor(props) {
@@ -13,10 +12,10 @@ class GameCollection extends Component {
 
     render() {
         return this.props.items.collection == '' || this.props.items.collection == null ?
-            <div className="ui header">
-                <span>No games found. Start by adding your favorite games!</span>
+            <div className="ui basic segment" style={{margin: '0 auto'}}>
+                <h3 className="ui header">No games found. Start by adding your favorite games!</h3>
             </div> : this.props.items.collection.map((item) => (
-                <div className="four wide computer seven wide mobile five wide tablet column" key={item.id} id={item.id}>
+                <div className="four wide computer seven wide mobile five wide tablet column animate__animated animate__fadeIn" key={item.id} id={item.id}>
                     <div className="ui card" draggable="false" unselectable="on">
                         <Link to={`/games/${item.id}/${item.slug}`}>
                             <div className="image">

@@ -162,15 +162,14 @@ img, video {
 .ui.card {
   background-color: rgba(0, 0, 0, 0);
   box-shadow: none;
-  transition: all .5s ease-in-out;
 }
 
-.ui.grid {
-  justify-content: center;
-}
-
-.ui.grid > .column > .ui.card:hover > a > .image > .ui.placeholder {
+.ui.card:hover > a {
   box-shadow: 5px 5px 5px #bdbdbd;
+  transition: all .2s ease-in-out;
+}
+
+.ui.grid > .column > .ui.card:hover {
   transform: scale(1.05);
   transition: all .2s ease-in-out;
 }
@@ -183,7 +182,6 @@ img, video {
   padding: 0px;
   padding-top: 10px;
   min-height: 80px;
-  background-color: #eeeeee;
 }
 
 .message > .ui.items {

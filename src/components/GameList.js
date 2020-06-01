@@ -12,7 +12,7 @@ class GameList extends Component {
 
   render() {
     return this.props.items.games.map((item) => (
-      <div className="four wide computer seven wide mobile five wide tablet column" key={item.id} id={item.id}>
+      <div className="four wide computer seven wide mobile five wide tablet column animate__animated animate__fadeIn" key={item.id} id={item.id}>
         <div className="ui card" draggable="false" unselectable="on">
           <Link to={`/games/${item.id}/${item.slug}`}>
             <div className="image">

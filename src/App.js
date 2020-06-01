@@ -101,6 +101,7 @@ class App extends Component {
   }
 
   checkStatus(item) {
+    // Returns true/false depending on currently saved games.
     if (this.state.items.collection != null) {
       return this.state.items.collection.some(game => game.id == item.id)
     } else {
@@ -108,24 +109,26 @@ class App extends Component {
     }
   }
 
-  render() {
-    const deleteGame = (event) => {
-      // Tar bort filmen som användaren klickar på.
-      let currentState = [...this.state.items.collection];
-      let index = currentState.findIndex(
-        item => item.name === event.target.parentElement.parentElement.previousSibling.previousSibling.innerHTML
-      );
-      console.log(event.target.parentElement.parentElement.previousSibling.previousSibling.innerHTML)
-      const val = window.confirm(`Remove From Collection?`);
-      if (val) {
+  deleteGame(event) {
+    // Removes specific game that the user clicks on. 
+    // Matches the current state game id with the one saved in localstorage.
+    let currentState = [...this.state.items.collection];
+    let index = currentState.findIndex(
+      item => item.id === event.target.parentElement.parentElement.parentNode.parentNode.parentNode.id
+    );
+    const val = window.confirm(`Remove From Collection?`);
+    if (val) {
+      document.getElementById('Collection').children[1].childNodes[index].className = 'four wide computer seven wide mobile five wide tablet column animate__animated animate__fadeOutUp';
+      setTimeout(() => {
         currentState.splice(index, 1);
         this.setState({ items: { games: this.state.items.games, collection: currentState || [] } });
-
         localStorage.setItem("Collection", JSON.stringify(currentState));
-        console.log(currentState, index);
         this.loadCollection()
-      }
+      }, 500);
     }
+  }
+
+  render() {
     return (
       <Router>
         <div id="App">
@@ -149,13 +152,15 @@ class App extends Component {
                     }}><i aria-hidden="false" className="arrow down icon"></i> Bottom
                   </button>
                 </div>
-                <div className="ui header">
-                  <div className="ui large header">
-                    <span>My Collection</span>
+                <div id="Collection">
+                  <div className="ui center aligned header">
+                    <div className="ui large header">
+                      <span>My Collection</span>
+                    </div>
                   </div>
-                </div>
-                <div className="ui grid">
-                  <GameCollection items={this.state.items} loadCollection={this.loadCollection.bind(this)} saveGame={this.saveGame.bind(this)} deleteGame={deleteGame} />
+                  <div className="ui grid">
+                    <GameCollection items={this.state.items} loadCollection={this.loadCollection.bind(this)} saveGame={this.saveGame.bind(this)} deleteGame={this.deleteGame.bind(this)} />
+                  </div>
                 </div>
                 <div className="ui divider"></div>
                 <div className="ui header">
@@ -165,8 +170,8 @@ class App extends Component {
                 </div>
                 <div className="ui grid">
                   {this.state.loading ?
-                    <div className="content" style={{ width: '100% !important', height: '300px' }}>
-                      <div style={{ position: 'relative' }} className="ui active centered large text loader">Loading</div>
+                    <div className="content" style={{ margin: '0 auto', height: '300px' }}>
+                      <div style={{ position: 'relative' }} className="ui active large text loader">Loading</div>
                     </div>
                     : <GameList items={this.state.items} saveGame={this.saveGame.bind(this)} checkStatus={this.checkStatus.bind(this)} />}
                 </div>
