@@ -151,12 +151,12 @@ img, video {
 
 .description {
   opacity: 0;
+  transition: opacity .4s ease-in-out;
 }
 
 .ui.card:hover > .content > .description {
   z-index: 1;
   opacity: 1;
-  transition: opacity .5s ease-in-out;
 }
 
 .ui.card {
@@ -164,12 +164,12 @@ img, video {
   box-shadow: none;
 }
 
-.ui.card:hover > a {
+a > .image{
   box-shadow: 5px 5px 5px #bdbdbd;
   transition: all .2s ease-in-out;
 }
 
-.ui.grid > .column > .ui.card:hover {
+.ui.grid > .column > .ui.card:hover > a > .image {
   transform: scale(1.05);
   transition: all .2s ease-in-out;
 }
@@ -237,7 +237,12 @@ img, video {
 
 .game-description {
   max-height: 182.8px;
-  overflow-y: auto;
+  overflow-y: hidden;
+}
+
+.ui.segment > .ui.basic.compact.button {
+  width: 100%;
+  margin-top: 10px;
 }
 
 .ui.text.container {

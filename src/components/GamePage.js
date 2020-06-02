@@ -21,11 +21,13 @@ class GamePage extends Component {
             game_creators: '',
             game_genres: '',
             game_ratings: '',
-            game_esrb: ''
+            game_esrb: '',
+            desc_height: 0
         };
     }
 
     componentDidMount() {
+        setTimeout(() => { this.setState({ desc_height: document.getElementById('Desc').clientHeight }) }, 500);
         this.loadGamePage();
     }
 
@@ -47,7 +49,6 @@ class GamePage extends Component {
                     game_ratings: game_details.ratings,
                     game_esrb: game_details.esrb_rating
                 })
-                console.log(this.state.game_details)
             })
         axios.get(`https://api.rawg.io/api/games/${params.id}/development-team`)
             .then(res => {
@@ -70,6 +71,20 @@ class GamePage extends Component {
                 return '#f0f000' // Yellow
             default: return '';
         }
+    }
+
+    toggleDesc() {
+        let element = document.getElementsByClassName('game-description')[0];
+        let btn = document.getElementById('Btn-Desc')
+        element.style.maxHeight = `${element.firstChild.clientHeight}px`
+        if (btn.innerHTML == 'Show More') {
+            btn.innerHTML = 'Show Less'
+        } else {
+            element.style.maxHeight = '182.8px'
+            btn.innerHTML = 'Show More'
+        }
+        element.className = 'game-description animate__animated animate__fadeIn'
+        setTimeout(() => { element.className = 'game-description' }, 500);
     }
 
     render() {
@@ -125,7 +140,7 @@ class GamePage extends Component {
                                 <div className="ui header">
                                     <div className="ui header">{game.name}</div>
                                     <div className="meta" data-id={game.id} data-image={game.background_image} data-slug={game.slug}>Release date - {game.tba === true ? "To Be Announced" : game.released}
-                                        <div id="Status" style={{marginLeft: '10px', display: 'inline'}}>
+                                        <div id="Status" style={{ marginLeft: '10px', display: 'inline' }}>
                                             {this.props.checkStatus(game) == false ? <button className="ui small compact basic button" onClick={(e) => this.props.saveGame(e)} style={{ marginLeft: '10px', padding: '5px' }}>
                                                 <i aria-hidden="true" class="star outline icon"></i>Add game to collection</button> :
                                                 <button className="ui small compact basic primary button animate__animated animate__fadeIn">Status: Completed</button>
@@ -140,8 +155,9 @@ class GamePage extends Component {
                                 </div>
                                 <div className="ui segment">
                                     <div className="game-description">
-                                        <p>{game.description_raw === "" ? "No description available" : game.description_raw}</p>
+                                        <p id="Desc">{game.description_raw === "" ? "No description available" : game.description_raw}</p>
                                     </div>
+                                    {this.state.desc_height <= 185 ? '' : <button id='Btn-Desc' className="ui basic compact button animate__animated animate__fadeInDown" onClick={() => this.toggleDesc()}>Show More</button>}
                                 </div>
                                 <div role="list" className="ui list">
                                     <div className="ui stackable two column grid">
