@@ -50,7 +50,7 @@ class SearchBar extends Component {
                         autocomplete="off"
                         ref={input => this.search = input}
                         onChange={() => this.handleChange()} />
-                    <i aria-hidden="true" class="search icon orange"></i>
+                    <i aria-hidden="true" class="search icon black"></i>
                 </div>
                 <div className="results transition" style={{ display: this.state.show_search ? 'block' : 'none' }}>
                     <div className="message">

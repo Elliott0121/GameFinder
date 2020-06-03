@@ -89,7 +89,7 @@ img, video {
 }
 
 .divider-gamelist {
-  margin-bottom: 50px;
+  margin: 15px 0px 50px 0px;
   text-align: center;
 }
 
@@ -120,6 +120,7 @@ img, video {
 .ui.placeholder > img {
   height: 100%;
   width: 100%;
+  object-fit: cover;
 }
 
 .ui.header:first-child {
@@ -281,9 +282,8 @@ video {
   object-fit: cover;
 }
 
-.column > span {
-  display: inline list-item;
-  margin-right: 5px;
+.ui.list > .ui.celled.grid > .column > .ui.basic.button {
+  margin: 0px 5px 5px 0px;
 }
 
 .ui.column.four.wide.computer > .ui.card > .ui.image {

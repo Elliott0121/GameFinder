@@ -12,8 +12,8 @@ class Header extends Component {
                             <a href="/" className="ui header active item">GameFinder</a>
                         </Link>
                         <SearchBar />
-                        <a href="/" className="ui header right item">About</a>
-                        <a href="/" className="ui header item">Other</a>
+                        <a href="/" className="ui header right item"></a>
+                        <a href="/" className="ui header item"></a>
                     </div>
                 </div>
             </nav>
