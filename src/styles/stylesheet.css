@@ -379,6 +379,11 @@ video {
   width: 700px;
 }
 
+.menu.transition > .item.ui.small {
+  margin: 5px;
+  border-radius: 0px;
+}
+
 /*-------Media Queries--------*/
 @media screen and (max-width: 1200px) {
   .ui.grid > [class*="four wide computer"].column {

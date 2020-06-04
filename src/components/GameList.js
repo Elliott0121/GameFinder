@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Status from './Status.js';
 
 class GameList extends Component {
   constructor(props) {
@@ -12,10 +13,10 @@ class GameList extends Component {
   }
 
   toggleVideo(event, status, game) {
-    if (status == true && game.clip != null && event.target != null) {
+    if (status == true && game.clip != null) {
       let video = document.createElement('video')
       video.src = game.clip.clips['320'],
-        video.volume = 0.1
+        video.muted = true,
         video.loop = true,
         video.draggable = false,
         video.unselectable = false,
@@ -46,14 +47,16 @@ class GameList extends Component {
           <div className="content">
             <div className="header">{item.name}</div>
             <div className="meta" data-id={item.id} data-image={item.background_image} data-slug={item.slug}>
-              Release date - {item.tba === true ? "To Be Announced" : item.released}</div>
+              <span>Release date - {item.tba === true ? "To Be Announced" : item.released}</span>
+            </div>
             <div className="description">
-              <div id="Status">
-                {this.props.checkStatus(item) == false ? <button className="ui small compact basic button" onClick={(e) => this.props.saveGame(e)}>
-                  <i aria-hidden="true" class="star outline icon"></i>Add game to collection</button> :
-                  <button className="ui small compact basic primary button animate__animated animate__fadeIn">Status: Completed</button>
-                }
-              </div>
+              <Status
+                status={this.props.items}
+                item={item}
+                checkStatus={this.props.checkStatus(item)}
+                saveGame={this.props.saveGame.bind(this)}
+                setColor={this.props.setColor}
+              />
             </div>
           </div>
         </div>

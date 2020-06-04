@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Header from './Header.js';
 import axios from 'axios';
 import { Popup } from 'semantic-ui-react';
-//import { Link } from 'react-router-dom';
+import Status from './Status.js';
 
 class GamePage extends Component {
     constructor(props) {
@@ -59,20 +59,6 @@ class GamePage extends Component {
             })
     }
 
-    setRating(value) {
-        switch (value) {
-            case ('meh'):
-                return '#fda400' // Orange
-            case ('exceptional'):
-                return '#008400' // Green
-            case ('skip'):
-                return '#e10000' // Red
-            case ('recommended'):
-                return '#f0f000' // Yellow
-            default: return '';
-        }
-    }
-
     toggleDesc() {
         let element = document.getElementsByClassName('game-description')[0];
         let btn = document.getElementById('Btn-Desc')
@@ -121,7 +107,7 @@ class GamePage extends Component {
             </div>)
         const gameRatings = Object.keys(this.state.game_ratings).map((val, i) =>
             <Popup content={this.state.game_ratings[val].title + ":" + this.state.game_ratings[val].count} trigger={
-                <div key={i} className={"bar " + this.state.game_ratings[val].title} style={{ width: this.state.game_ratings[val].percent + '%', backgroundColor: this.setRating(this.state.game_ratings[val].title), boxShadow: 'rgba(0, 0, 0, 0.1) 10px 10px 10px inset' }}>
+                <div key={i} className={"bar " + this.state.game_ratings[val].title} style={{ width: this.state.game_ratings[val].percent + '%', backgroundColor: this.props.setColor(this.state.game_ratings[val].title), boxShadow: 'rgba(0, 0, 0, 0.1) 10px 10px 10px inset' }}>
                 </div>} style={{ fontSize: "16px", textTransform: "capitalize" }} />)
         return (
             <div className="ui container">
@@ -139,13 +125,15 @@ class GamePage extends Component {
                             <div className="ui text container">
                                 <div className="ui header">
                                     <div className="ui header">{game.name}</div>
-                                    <div className="meta" data-id={game.id} data-image={game.background_image} data-slug={game.slug}>Release date - {game.tba === true ? "To Be Announced" : game.released}
-                                        <div id="Status" style={{ marginLeft: '10px', display: 'inline' }}>
-                                            {this.props.checkStatus(game) == false ? <button className="ui small compact basic button" onClick={(e) => this.props.saveGame(e)} style={{ marginLeft: '10px', padding: '5px' }}>
-                                                <i aria-hidden="true" class="star outline icon"></i>Add game to collection</button> :
-                                                <button className="ui small compact basic primary button animate__animated animate__fadeIn">Status: Completed</button>
-                                            }
-                                        </div>
+                                    <div className="meta" style={{ display: 'flex' }} data-id={game.id} data-image={game.background_image} data-slug={game.slug}>
+                                        <span style={{marginRight: '10px'}} >Release date - {game.tba === true ? "To Be Announced" : game.released}</span>
+                                        <Status
+                                            status={this.props.items}
+                                            item={game}
+                                            checkStatus={this.props.checkStatus(game)}
+                                            saveGame={this.props.saveGame.bind(this)}
+                                            setColor={this.props.setColor}
+                                        />
                                     </div>
                                     <div id="platforms" className="ui list">
                                         <div className="ui grid">

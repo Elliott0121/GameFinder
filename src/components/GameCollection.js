@@ -28,8 +28,9 @@ class GameCollection extends Component {
                             <div className="header">{item.name}</div>
                             <div className="meta">Release date - {item.release}</div>
                             <div className="description">
-                                <button className="ui compact small basic primary button">
-                                    <i className='ban icon red' onClick={(e) => this.props.deleteGame(e)}></i>Status: Completed
+                                <button className={`ui compact small basic ${this.props.setColor(item.status)} button`}>
+                                    <i className='ban icon red' onClick={(e) => this.props.deleteGame(e)}></i>
+                                    Status: {item.status}
                                 </button>
                             </div>
                         </div>

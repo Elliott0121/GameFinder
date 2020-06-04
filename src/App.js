@@ -79,14 +79,15 @@ class App extends Component {
   saveGame(event) {
     //event.target.children.textContent = 'Status: Completed';
     //event.target.children.className = 'ui compact small basic primary button animate__animated animate__fadeIn';
-    let content = event.target.parentElement.parentElement.parentNode.children;
+    let content = event.target.parentElement.parentElement.parentNode.parentNode.parentNode.children;
+    console.log(event.target.textContent, content[1].firstChild.lastChild.data)
     let newGame = {
-      name: event.target.parentElement.parentElement.parentNode.children[0].innerHTML,
+      name: content[0].innerHTML,
       id: content[1].getAttribute('data-id'),
       slug: content[1].getAttribute('data-slug'),
       image: content[1].getAttribute('data-image'),
-      release: content[1].firstChild.nextSibling.data,
-      status: 'Completed'
+      release: content[1].firstChild.lastChild.data,
+      status: event.target.textContent
     }
     let currentCollection = [...this.state.items.collection]
     currentCollection.push(newGame)
@@ -106,6 +107,23 @@ class App extends Component {
       return this.state.items.collection.some(game => game.id == item.id)
     } else {
       return;
+    }
+  }
+
+  setColor(status) {
+    switch (status) {
+      case 'Completed':
+      case 'recommended':
+        return 'blue'
+      case 'Played':
+      case 'exceptional':
+        return 'green'
+      case '100%':
+      case 'meh':
+        return 'orange'
+      case 'skip':
+        return 'red'
+      default: ''
     }
   }
 
@@ -159,7 +177,7 @@ class App extends Component {
                     </div>
                   </div>
                   <div className="ui grid">
-                    <GameCollection items={this.state.items} loadCollection={this.loadCollection.bind(this)} saveGame={this.saveGame.bind(this)} deleteGame={this.deleteGame.bind(this)} />
+                    <GameCollection items={this.state.items} loadCollection={this.loadCollection.bind(this)} deleteGame={this.deleteGame.bind(this)} setColor={this.setColor.bind(this)} />
                   </div>
                 </div>
                 <div className="ui divider"></div>
@@ -173,7 +191,7 @@ class App extends Component {
                     <div className="content" style={{ margin: '0 auto', height: '300px' }}>
                       <div style={{ position: 'relative' }} className="ui active large text loader">Loading</div>
                     </div>
-                    : <GameList items={this.state.items} saveGame={this.saveGame.bind(this)} checkStatus={this.checkStatus.bind(this)} />}
+                    : <GameList items={this.state.items} saveGame={this.saveGame.bind(this)} checkStatus={this.checkStatus.bind(this)} setColor={this.setColor.bind(this)} />}
                 </div>
                 <div className="divider-gamelist">
                   <div className="showmore-icon">
@@ -192,7 +210,7 @@ class App extends Component {
                 </div>
               </div>
             </Route>
-            <Route path="/games/:id" render={(props) => <GamePage {...props} saveGame={this.saveGame.bind(this)} checkStatus={this.checkStatus.bind(this)} />} />
+            <Route path="/games/:id" render={(props) => <GamePage {...props} saveGame={this.saveGame.bind(this)} checkStatus={this.checkStatus.bind(this)} setColor={this.setColor.bind(this)} items={this.state.items} />} />
             <Route component={() => (<h1 style={{ textAlign: "center" }}>404 Not found </h1>)} />
           </Switch>
         </div>
