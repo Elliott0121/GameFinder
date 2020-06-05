@@ -102,7 +102,6 @@ class GamePage extends Component {
                     </div>
                     <div className="content">
                         <div className="header">{this.state.game_creators[val].name}</div>
-                        {/*<div className="meta">{this.state.game_creators[val].name}</div>*/}
                     </div>
                 </div>
             </div>)
