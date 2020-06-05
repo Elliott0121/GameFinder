@@ -17,4 +17,9 @@ Game Library - Made using React.
 - Once installed, run `npm start` or `npm run start` to start the server.
 - Access the web application at `localhost:8080`.
 
+## Dependencies
+- [React](https://reactjs.org/), [Semantic UI React](https://react.semantic-ui.com/), [Animate.css](https://animate.style/)
+- [RAWG Video Games Database](https://rawg.io/apidocs)
+- Check [package.json](https://github.com/Elliott0121/GameFinder/blob/master/package.json) for all dependencies.
+
 </td></tr></table>
