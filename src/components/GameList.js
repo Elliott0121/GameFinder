@@ -13,6 +13,7 @@ class GameList extends Component {
   }
 
   toggleVideo(event, status, game) {
+    // Displays video on mouse hover.
     if (status == true && game.clip != null) {
       let video = document.createElement('video')
       video.src = game.clip.clips['320'],

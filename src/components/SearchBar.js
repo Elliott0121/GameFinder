@@ -22,6 +22,8 @@ class SearchBar extends Component {
     }
 
     handleChange() {
+        // Handles search input.
+        // Adds the current query to the state.
         this.setState({
             query: this.search.value
         }, () => {

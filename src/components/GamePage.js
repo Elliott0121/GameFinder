@@ -32,6 +32,7 @@ class GamePage extends Component {
     }
 
     loadGamePage() {
+        // Loads in data for the specific gamepage.
         const { match: { params } } = this.props;
         axios.get(`https://api.rawg.io/api/games/${params.id}`)
             .then(res => {

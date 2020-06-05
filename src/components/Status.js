@@ -19,7 +19,7 @@ export class Status extends Component {
                     :
                     this.props.status.collection.map((game => game.id == this.props.item.id ?
                         <button key={game.id} className={`ui small compact basic ${this.props.setColor(game.status)} button animate__animated animate__fadeIn`}>
-                            Status: {this.props.status.collection.map((game => game.id == this.props.item.id ? game.status : ''))}
+                            Status: {game.id == this.props.item.id ? game.status : ''}
                         </button>
                         : ''))
                 }

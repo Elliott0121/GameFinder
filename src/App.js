@@ -31,6 +31,7 @@ class App extends Component {
   }
 
   getGames() {
+    // Gets the current popular games and saves them in the state.
     try {
       axios.get(`https://api.rawg.io/api/games`)
         .then(res => {
@@ -62,13 +63,13 @@ class App extends Component {
   }
 
   loadnewPage() {
+    // Loads in new games and adds them to the items.games state.
     axios.get(`https://api.rawg.io/api/games?dates=${this.state.currentDate},${new Date(this.state.currentDate).toLocaleDateString('en-US', { year: 'numeric' })}-12-31&ordering=-added&page=${this.state.currentPage}`)
       .then(res => {
         const newGames = this.state.items.games.concat(res.data.results);
         this.setState(prevState => {
           return { currentPage: prevState.currentPage + 1, items: { games: newGames, collection: JSON.parse(localStorage.getItem('Collection')) || [] } }
         })
-        console.log(this.state.currentPage);
       })
     if (this.state.currentPage === 3) {
       document.getElementById("show-icon").innerHTML = 'Loaded all pages';
@@ -77,10 +78,8 @@ class App extends Component {
   }
 
   saveGame(event) {
-    //event.target.children.textContent = 'Status: Completed';
-    //event.target.children.className = 'ui compact small basic primary button animate__animated animate__fadeIn';
+    // Adds a new entry to the collection. Data is stored in localStorage.
     let content = event.target.parentElement.parentElement.parentNode.parentNode.parentNode.children;
-    console.log(event.target.textContent, content[1].firstChild.lastChild.data)
     let newGame = {
       name: content[0].innerHTML,
       id: content[1].getAttribute('data-id'),
@@ -173,7 +172,8 @@ class App extends Component {
                 <div id="Collection">
                   <div className="ui center aligned header">
                     <div className="ui large header">
-                      <span>My Collection</span>
+                      <i aria-hidden="true" className="hdd outline icon"></i>
+                      My Collection
                     </div>
                   </div>
                   <div className="ui grid">
