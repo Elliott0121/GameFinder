@@ -9,7 +9,7 @@ class Header extends Component {
                 <div className="ui large pointing secondary menu">
                     <div className="ui container">
                         <Link to="/">
-                            <a href="/" className="ui header active item">GameFinder</a>
+                            <span href="/" className="ui header active item">GameFinder</span>
                         </Link>
                         <SearchBar />
                         <a className="ui header right item"></a>

@@ -38,7 +38,6 @@ class SearchBar extends Component {
                 this.setState({ show_search: false })
             }
         });
-        console.log(this.state.query)
     }
 
     render() {
@@ -47,21 +46,21 @@ class SearchBar extends Component {
                 <div className="ui icon input" >
                     <input type="text"
                         placeholder="Search for Games..."
-                        autocomplete="off"
+                        autoComplete="off"
                         ref={input => this.search = input}
                         onChange={() => this.handleChange()} />
-                    <i aria-hidden="true" class="search icon black"></i>
+                    <i aria-hidden="true" className="search icon black"></i>
                 </div>
                 <div className="results transition" style={{ display: this.state.show_search ? 'block' : 'none' }}>
                     <div className="message">
                         <div className="ui items">
                             {this.state.results.map(r => (
-                                <div className="item" id={r.slug}>
+                                <div className="item" key={r.id} id={r.slug}>
                                     <div className="ui tiny image">{r.background_image === null ? <i aria-hidden="true" className="ban huge icon" /> : <img src={r.background_image} alt={r.name} draggable="false" unselectable="on" />}</div> 
                                     <div className="header" style={{ marginLeft: "5px" }}>
                                         <ul>
                                             <a href={`/games/${r.id}/${r.slug}`}>
-                                                <li li key={r.id}>{r.name}</li>
+                                                <li key={r.id}>{r.name}</li>
                                             </a>
                                         </ul>
                                     </div>

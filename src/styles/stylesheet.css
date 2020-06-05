@@ -170,6 +170,10 @@ a > .image{
   transition: all .2s ease-in-out;
 }
 
+.ui.container > .ui.grid {
+  justify-content: center;
+}
+
 .ui.grid > .column > .ui.card:hover > a > .image {
   transform: scale(1.05);
   transition: all .2s ease-in-out;
@@ -384,6 +388,10 @@ video {
   border-radius: 0px;
 }
 
+.item.ui.small > .text {
+  pointer-events: none !important;
+}
+
 /*-------Media Queries--------*/
 @media screen and (max-width: 1200px) {
   .ui.grid > [class*="four wide computer"].column {
@@ -394,9 +402,6 @@ video {
   .ui.grid > [class*="four wide computer"].column {
     width: 30% !important;
   }
-  .ui.container {
-    width: 900px;
-  }
 }
 @media screen and (max-width: 800px) {
   .ui.grid > [class*="four wide computer"].column {
@@ -406,6 +411,9 @@ video {
 @media screen and (max-width: 540px) {
   .ui.grid > [class*="four wide computer"].column {
     width: 50% !important;
+  }
+  .header > .meta > span {
+    font-size: 13px !important;
   }
 }
 @media screen and (max-width: 420px) {

@@ -97,7 +97,7 @@ class GamePage extends Component {
             <div className="ui column four wide computer four wide mobile" key={i}>
                 <div className="ui card" id="Developers">
                     <div className="ui image">
-                        {this.state.game_creators[val].image === null ? <i class="ui icon huge user outline"></i> : <img src={this.state.game_creators[val].image} alt={this.state.game_creators[val].name} />}
+                        {this.state.game_creators[val].image === null ? <i className="ui icon huge user outline"></i> : <img src={this.state.game_creators[val].image} alt={this.state.game_creators[val].name} />}
                     </div>
                     <div className="content">
                         <div className="header">{this.state.game_creators[val].name}</div>
@@ -106,8 +106,8 @@ class GamePage extends Component {
                 </div>
             </div>)
         const gameRatings = Object.keys(this.state.game_ratings).map((val, i) =>
-            <Popup content={this.state.game_ratings[val].title + ":" + this.state.game_ratings[val].count} trigger={
-                <div key={i} className={"bar " + this.state.game_ratings[val].title} style={{ width: this.state.game_ratings[val].percent + '%', backgroundColor: this.props.setColor(this.state.game_ratings[val].title), boxShadow: 'rgba(0, 0, 0, 0.1) 10px 10px 10px inset' }}>
+            <Popup key={i} content={this.state.game_ratings[val].title + ":" + this.state.game_ratings[val].count} trigger={
+                <div className={"bar " + this.state.game_ratings[val].title} style={{ width: this.state.game_ratings[val].percent + '%', backgroundColor: this.props.setColor(this.state.game_ratings[val].title), boxShadow: 'rgba(0, 0, 0, 0.1) 10px 10px 10px inset' }}>
                 </div>} style={{ fontSize: "16px", textTransform: "capitalize" }} />)
         return (
             <div className="ui container">
@@ -117,7 +117,6 @@ class GamePage extends Component {
                         <div className="game-background">
                             <video autoPlay muted loop draggable="false" unselectable="on" src=
                                 {this.state.game_clip.full} type="video/mp4" poster={game.background_image} />
-                            {/*<img src={game.background_image} alt={game.name} className="ui image" draggable="false" unselectable="on" />*/}
                         </div>
                     </div>
                     <div className="ui stackable two column grid">
@@ -200,7 +199,7 @@ class GamePage extends Component {
                         <div className="column eight wide computer mobile sixteen wide">
                             <div className="ui text container">
                                 <div className="ui segment">
-                                    <div role="list" class="ui list">
+                                    <div role="list" className="ui list">
                                         <div className="ui small header">Tags</div>
                                         <div className="ui celled grid">
                                             <div className="column">
@@ -211,7 +210,7 @@ class GamePage extends Component {
                                 </div>
                                 <div className="ui small header">Artwork</div>
                                 <div className="ui celled grid">
-                                    <img src={game.background_image} class="ui bordered image" />
+                                    <img src={game.background_image} className="ui bordered image" />
                                 </div>
                                 <div className="ui small header">Key Staff Members</div>
                                 <div className="ui grid">
@@ -227,7 +226,7 @@ class GamePage extends Component {
 }
 
 GamePage.propTypes = {
-    items: PropTypes.array.isRequired
+    items: PropTypes.object.isRequired
 }
 
 export default GamePage;
